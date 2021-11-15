@@ -1,59 +1,125 @@
 package ru.netology.domain;
 
+import org.junit.jupiter.api.BeforeEach;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 class PosterManagerTest {
+    private PosterManager manager = new PosterManager();
+    private TapeFilms first = new TapeFilms("The Suicide Squad",1);
+    private TapeFilms second = new TapeFilms("The Gentlemen",2);
+    private TapeFilms third = new TapeFilms("Wrath of Man",3);
+    private TapeFilms fourth = new TapeFilms("Nobody",4);
+    private TapeFilms fifth = new TapeFilms("Free Guy",5);
+    private TapeFilms sixth = new TapeFilms("Dune: Part One",6);
+    private TapeFilms seventh = new TapeFilms("Mortal Kombat",7);
+    private TapeFilms eighth = new TapeFilms("Cruella",8);
+    private TapeFilms ninth = new TapeFilms("Black Widow",9);
+    private TapeFilms tenth = new TapeFilms("Godzilla vs. Kong",10);
+    private TapeFilms eleventh = new TapeFilms("Army of the Dead",11);
+
+    @BeforeEach
+    public void setUp() {
+        manager.addFilm(first);
+        manager.addFilm(second);
+        manager.addFilm(third);
+        manager.addFilm(fourth);
+        manager.addFilm(fifth);
+        manager.addFilm(sixth);
+        manager.addFilm(seventh);
+        manager.addFilm(eighth);
+        manager.addFilm(ninth);
+        manager.addFilm(tenth);
+        manager.addFilm(eleventh);
+    }
 
     @Test
     void addFilm() {
-        PosterManager posterManager = new PosterManager();
-        posterManager.addFilm("The Suicide Squad");
+        TapeFilms twelfth = new TapeFilms("No Time to Die",12);
 
-        int actual = posterManager.tapeFilms.length;
-        int expected = 12;
+        TapeFilms[] actual = manager.addFilm(twelfth);
+        TapeFilms[] expected = new TapeFilms[]{first, second, third, fourth, fifth, sixth,
+                seventh, eighth, ninth, tenth, eleventh, twelfth};
 
-        assertEquals(expected,actual);
+        assertArrayEquals(expected, actual);
     }
 
     @Test
     void showTape() {
-        PosterManager posterManager = new PosterManager();
 
-        int actual = posterManager.showTape();
-        int expected = 10;
+        TapeFilms[] actual = manager.showTape();
+        TapeFilms[] expected = new TapeFilms[]{eleventh, tenth, ninth, eighth, seventh, sixth, fifth,
+                fourth, third, second};
 
-        assertEquals(expected,actual);
+        assertArrayEquals(expected, actual);
     }
 
     @Test
-    void showTapeAverage() {
-        PosterManager posterManager = new PosterManager(5);
+    void showTapeAverageСonstructor() {
+        PosterManager manager = new PosterManager(5);
 
-        int actual = posterManager.showTape();
-        int expected = 5;
+        manager.addFilm(first);
+        manager.addFilm(second);
+        manager.addFilm(third);
+        manager.addFilm(fourth);
+        manager.addFilm(fifth);
+        manager.addFilm(sixth);
+        manager.addFilm(seventh);
+        manager.addFilm(eighth);
+        manager.addFilm(ninth);
+        manager.addFilm(tenth);
+        manager.addFilm(eleventh);
 
-        assertEquals(expected,actual);
+        TapeFilms[] actual = manager.showTape();
+        TapeFilms[] expected = new TapeFilms[]{eleventh, tenth, ninth, eighth, seventh};
+
+        assertArrayEquals(expected, actual);
     }
 
     @Test
-    void showTapeMax() {
-        PosterManager posterManager = new PosterManager(12);
+    void showTapeMaxСonstructor() {
+        PosterManager manager = new PosterManager(12);
 
-        int actual = posterManager.showTape();
-        int expected = 10;
+        manager.addFilm(first);
+        manager.addFilm(second);
+        manager.addFilm(third);
+        manager.addFilm(fourth);
+        manager.addFilm(fifth);
+        manager.addFilm(sixth);
+        manager.addFilm(seventh);
+        manager.addFilm(eighth);
+        manager.addFilm(ninth);
+        manager.addFilm(tenth);
+        manager.addFilm(eleventh);
 
-        assertEquals(expected,actual);
+        TapeFilms[] actual = manager.showTape();
+        TapeFilms[] expected = new TapeFilms[]{eleventh, tenth, ninth, eighth, seventh, sixth, fifth,
+                fourth, third, second, first};
+
+        assertArrayEquals(expected, actual);
     }
 
     @Test
-    void showTapeMin() {
-        PosterManager posterManager = new PosterManager(1);
+    void showTapeMinСonstructor() {
+        PosterManager manager = new PosterManager(0);
 
-        int actual = posterManager.showTape();
-        int expected = 1;
+        manager.addFilm(first);
+        manager.addFilm(second);
+        manager.addFilm(third);
+        manager.addFilm(fourth);
+        manager.addFilm(fifth);
+        manager.addFilm(sixth);
+        manager.addFilm(seventh);
+        manager.addFilm(eighth);
+        manager.addFilm(ninth);
+        manager.addFilm(tenth);
+        manager.addFilm(eleventh);
 
-        assertEquals(expected,actual);
+        TapeFilms[] actual = manager.showTape();
+        TapeFilms[] expected = new TapeFilms[]{};
+
+        assertArrayEquals(expected, actual);
     }
 }

@@ -2,8 +2,6 @@ package ru.netology.domain;
 
 public class PosterManager {
     private int numberOfFilms = 10;
-    String[] tapeFilms = {"The Gentlemen", "Dune: Part One", "Wrath of Man", "Mortal Kombat", "Cruella",
-            "Nobody", "Black Widow", "Godzilla vs. Kong", "Free Guy", "Army of the Dead", "No Time to Die"};
 
     public PosterManager() {
     }
@@ -12,25 +10,34 @@ public class PosterManager {
         this.numberOfFilms = numberOfFilms;
     }
 
-    public void addFilm(String film) {
-        int length = tapeFilms.length + 1;
-        String[] tmp = new String[length];
-        System.arraycopy(tapeFilms, 0, tmp,0, tapeFilms.length);
-        int index = tmp.length - 1;
-        tmp[index] = film;
-        tapeFilms = tmp;
+    public int getNumberOfFilms() {
+        return numberOfFilms;
     }
 
-    public int showTape() {
-        if (numberOfFilms > tapeFilms.length)
-            numberOfFilms = tapeFilms.length;
-        if (numberOfFilms > 10)
-            numberOfFilms = 10;
-        String[] tape = new String[numberOfFilms];
+    public void setNumberOfFilms(int numberOfFilms) {
+        this.numberOfFilms = numberOfFilms;
+    }
+
+    private TapeFilms[] films = new TapeFilms[0];
+
+    public TapeFilms[] addFilm(TapeFilms film) {
+        int length = films.length + 1;
+        TapeFilms[] tmp = new TapeFilms[length];
+        System.arraycopy(films, 0, tmp,0, films.length);
+        int index = tmp.length - 1;
+        tmp[index] = film;
+        films = tmp;
+        return films;
+    }
+
+    public TapeFilms[] showTape() {
+        if (numberOfFilms > films.length)
+            numberOfFilms = films.length;
+        TapeFilms[] tape = new TapeFilms[this.numberOfFilms];
         for (int i = 0; i < tape.length; i++){
-            int index = tapeFilms.length - i - 1;
-            tape[i] = tapeFilms[index];
+            int index = films.length - i - 1;
+            tape[i] = films[index];
         }
-        return tape.length;
+        return tape;
     }
 }
